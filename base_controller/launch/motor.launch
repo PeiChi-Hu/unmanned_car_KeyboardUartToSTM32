@@ -1,0 +1,4 @@
+<launch>
+<node pkg="base_controller" type="key_board.py" name="keyboard_pub" />
+<node pkg="base_controller" type="listen_uart.py" name="uart_listen" />
+</launch>
