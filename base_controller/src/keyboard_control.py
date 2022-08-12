@@ -7,13 +7,13 @@ from std_msgs.msg import String
 import roslib
 import time
 
-ser = serial.Serial(port='/dev/ttyUSB1', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=2)
+ser = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=2)
 ser.isOpen()
 
 def cmdcallback(msg):
     rospy.loginfo("Received a /keyboard message!")
     rospy.loginfo("%s", msg.data)
-    ser = serial.Serial(port='/dev/ttyUSB1', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=2)
+    ser = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, bytesize=8, parity='N', stopbits=1, timeout=2)
    
 
     print(msg.data)

@@ -8,7 +8,7 @@ from select import select
 
 import termios
 import tty
-import keyboard
+from getkey import getkey, keys
 
 from std_msgs.msg import String
 
@@ -28,35 +28,35 @@ def key():
     pub = rospy.Publisher('keyboard_control', String, queue_size=1)
     rate = rospy.Rate(7)
     while not rospy.is_shutdown():
-        if keyboard.is_pressed("w"):
+        g = getkey(blocking=True)
+        if g == 'w':
             rospy.loginfo("forward")
             pub.publish("w")
             rate.sleep()
-        elif keyboard.is_pressed("q"):
+        elif g == 'q':
             rospy.loginfo("left front")
             pub.publish("q")
             rate.sleep()
-        elif keyboard.is_pressed("a"):
+        elif keys.name(g) == "a":
             rospy.loginfo("left")
             pub.publish("a")
             rate.sleep()
-        elif keyboard.is_pressed("z"):
+        elif keys.name(g) == "z":
             rospy.loginfo("left back")
             pub.publish("z")
             rate.sleep()
-        elif keyboard.is_pressed("x"):
+        elif keys.name(g) == "x":
             rospy.loginfo("backward")
             pub.publish("x")
-            rate.sleep()
-        elif keyboard.is_pressed("c"):
+        elif keys.name(g) == "c":
             rospy.loginfo("right back")
             pub.publish("c")
             rate.sleep()
-        elif keyboard.is_pressed("d"):
+        elif keys.name(g) == "d":
             rospy.loginfo("go right")
             pub.publish("d")
             rate.sleep()
-        elif keyboard.is_pressed("e"):
+        elif keys.name(g) == "e":
             rospy.loginfo("right front")
             pub.publish("e")
             rate.sleep()
@@ -71,3 +71,4 @@ if __name__ == '__main__':
         key()
     except rospy.ROSInterruptException:
         pass
+
